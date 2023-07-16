@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "399619801688",
+    "project_id": "hbelga-c0ad8",
+    "storage_bucket": "hbelga-c0ad8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399619801688:android:987b19df9de084e7d7c02d",
+        "android_client_info": {
+          "package_name": "org.chakuy.hbelga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399619801688-oag21cdfmf2f18t1d5dh954n5fsbuo1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCwQ1BP1H9AMyTbm5mZZ2ScvU2YSnFgT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399619801688-oag21cdfmf2f18t1d5dh954n5fsbuo1d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399619801688:android:482302230373eeb3d7c02d",
+        "android_client_info": {
+          "package_name": "org.chakuy.hbsis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399619801688-oag21cdfmf2f18t1d5dh954n5fsbuo1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCwQ1BP1H9AMyTbm5mZZ2ScvU2YSnFgT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399619801688-oag21cdfmf2f18t1d5dh954n5fsbuo1d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
