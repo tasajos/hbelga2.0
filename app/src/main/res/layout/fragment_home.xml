@@ -10,10 +10,11 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
         android:columnOrderPreserved="false"
-        android:paddingTop="50dp"
+        android:paddingTop="60dp"
         android:rowCount="2">
 
         <!-- Tarjeta "Añadir" -->

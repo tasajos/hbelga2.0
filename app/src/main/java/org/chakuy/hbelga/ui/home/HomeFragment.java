@@ -1,37 +1,83 @@
 package org.chakuy.hbelga.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import org.chakuy.hbelga.databinding.FragmentHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.chakuy.hbelga.R;
+import org.chakuy.hbelga.login;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private LinearLayout linearLayoutAgregar;
+    private LinearLayout listado;
+    private LinearLayout descargar;
+    private LinearLayout cerrarsesion;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        linearLayoutAgregar = root.findViewById(R.id.linearLayoutAgregar);
+        listado = root.findViewById(R.id.listado);
+        descargar = root.findViewById(R.id.descargar);
+        cerrarsesion = root.findViewById(R.id.cerrarsesion);
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        setupCardClickListeners();
+
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void setupCardClickListeners() {
+        linearLayoutAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción para la tarjeta "Añadir"
+                // Aquí puedes implementar el comportamiento deseado
+                Toast.makeText(getActivity(), "Haz clic en Añadir", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción para la tarjeta "Listado"
+                // Aquí puedes implementar el comportamiento deseado
+                Toast.makeText(getActivity(), "Haz clic en Listado", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        descargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción para la tarjeta "Descargar"
+                // Aquí puedes implementar el comportamiento deseado
+                Toast.makeText(getActivity(), "Haz clic en Descargar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cerrarsesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción para la tarjeta "Cerrar Sesión"
+                logout();
+            }
+        });
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Toast.makeText(getActivity(), "Cierre de sesión exitoso", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), login.class));
+        getActivity().finish();
     }
 }

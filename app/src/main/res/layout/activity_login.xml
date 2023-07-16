@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wpaper"
+    android:background="@drawable/fpantalla"
     tools:context=".login">
 
     <androidx.cardview.widget.CardView
@@ -39,6 +39,7 @@
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/hbelgaicon" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -49,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Correo"
-                android:textSize="16dp"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/contrasena"
@@ -58,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Password"
-                android:textSize="16dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="16dp" />
 
             <Button
                 android:id="@+id/btn_login"
