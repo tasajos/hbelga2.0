@@ -17,6 +17,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import org.chakuy.hbelga.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +56,26 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         mAuth = FirebaseAuth.getInstance(); // Inicializar FirebaseAuth
+
+        // Configurar el evento de clic en los elementos del menú
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                // Manejar eventos de clic en los elementos del menú
+                int id = item.getItemId();
+                if (id == R.id.nav_home) {
+                    navController.navigate(R.id.nav_home);
+                } else if (id == R.id.nav_gallery) {
+                    navController.navigate(R.id.nav_gallery);
+                } else if (id == R.id.nav_slideshow) {
+                    navController.navigate(R.id.nav_slideshow);
+                } else if (id == R.id.nav_logout) {
+                    logout();
+                }
+                drawer.closeDrawers();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -76,5 +99,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void logout() {
+        mAuth.signOut(); // Cerrar sesión
+        Toast.makeText(MainActivity.this, "Cierre de sesión exitoso", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(MainActivity.this, login.class)); // Redirigir a la pantalla de inicio de sesión
+        finish();
     }
 }
