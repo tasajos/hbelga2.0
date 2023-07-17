@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     navController.navigate(R.id.nav_slideshow);
                 } else if (id == R.id.nav_logout) {
                     logout();
+                } else if (id == R.id.nav_lista) {
+                    navController.navigate(R.id.nav_lista);
+
                 }
                 drawer.closeDrawers();
                 return true;
