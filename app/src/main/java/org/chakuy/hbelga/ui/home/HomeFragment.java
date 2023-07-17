@@ -57,7 +57,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 // Acción para la tarjeta "Listado"
                 // Aquí puedes implementar el comportamiento deseado
-                Toast.makeText(getActivity(), "Haz clic en Listado", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(view).navigate(R.id.nav_lista);
+                Toast.makeText(getActivity(), "Cargando Listado.....", Toast.LENGTH_SHORT).show();
             }
         });
 
