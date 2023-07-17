@@ -11,6 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
+
+
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.chakuy.hbelga.R;
@@ -41,9 +47,8 @@ public class HomeFragment extends Fragment {
         linearLayoutAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Acción para la tarjeta "Añadir"
-                // Aquí puedes implementar el comportamiento deseado
-                Toast.makeText(getActivity(), "Haz clic en Añadir", Toast.LENGTH_SHORT).show();
+                // Navegar a GalleryFragment
+                Navigation.findNavController(view).navigate(R.id.nav_gallery);
             }
         });
 
