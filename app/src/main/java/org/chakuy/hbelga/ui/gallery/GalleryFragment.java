@@ -46,10 +46,10 @@ public class GalleryFragment extends Fragment {
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        tipoSpinner = root.findViewById(R.id.estado);
-        nombre = root.findViewById(R.id.nombre);
+        tipoSpinner = root.findViewById(R.id.arq);
+        nombre = root.findViewById(R.id.equipo);
         area = root.findViewById(R.id.area);
-        descripcion = root.findViewById(R.id.descripcion);
+        descripcion = root.findViewById(R.id.procesador);
         fecha = root.findViewById(R.id.fecha);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.tipos_producto, android.R.layout.simple_spinner_item);

@@ -13,6 +13,11 @@
             android:icon="@drawable/nav_bar_add"
             android:title="@string/menu_gallery" />
         <item
+            android:id="@+id/nav_ordenador"
+            android:icon="@drawable/nav_pc"
+            android:title="@string/menu_ordenador" />
+
+        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/nav_bar_about"
             android:title="@string/menu_slideshow" />

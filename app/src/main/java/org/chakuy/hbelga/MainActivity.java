@@ -3,23 +3,22 @@ package org.chakuy.hbelga;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.MenuItem;
-import android.widget.Toast;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.chakuy.hbelga.databinding.ActivityMainBinding;
 
@@ -37,32 +36,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse("https://hospitalbelga.com:2096/");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+
+        mAuth = FirebaseAuth.getInstance(); // Inicializar FirebaseAuth
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_ordenador)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        mAuth = FirebaseAuth.getInstance(); // Inicializar FirebaseAuth
-
         // Configurar el evento de clic en los elementos del menú
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Manejar eventos de clic en los elementos del menú
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
@@ -75,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
                     logout();
                 } else if (id == R.id.nav_lista) {
                     navController.navigate(R.id.nav_lista);
-
+                } else if (id == R.id.nav_ordenador) {
+                    navController.navigate(R.id.nav_ordenador);
                 }
+
                 drawer.closeDrawers();
                 return true;
             }
@@ -96,7 +90,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem linkedInItem = menu.findItem(R.id.action_settings);
+        linkedInItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                openLinkedInProfile();
+                return true;
+            }
+        });
+
         return true;
+    }
+
+    private void openLinkedInProfile() {
+        Uri linkedInUri = Uri.parse("https://www.linkedin.com/in/carlosazcarraga/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, linkedInUri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Agrega esta línea para abrir en un navegador externo
+        startActivity(intent);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.chakuy.hbelga.ui.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.Fragment;
@@ -18,9 +20,25 @@ import androidx.navigation.Navigation;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.chakuy.hbelga.R;
 import org.chakuy.hbelga.login;
+import org.chakuy.hbelga.ui.verlista.slideshow.hbdbdata;
+import org.chakuy.hbelga.ui.verlista.slideshow.vlista;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -28,6 +46,9 @@ public class HomeFragment extends Fragment {
     private LinearLayout listado;
     private LinearLayout descargar;
     private LinearLayout cerrarsesion;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference hbdbRef = db.collection("hbdb");
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,13 +88,59 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 // Acción para la tarjeta "Descargar"
                 // Aquí puedes implementar el comportamiento deseado
-                Toast.makeText(getActivity(), "Haz clic en Descargar", Toast.LENGTH_SHORT).show();
+
+                List<hbdbdata> dataList = new ArrayList<>();
+                Query query = hbdbRef;
+                query.get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        hbdbdata data = document.toObject(hbdbdata.class);
+                        dataList.add(data);
+                    }
+
+                    Workbook workbook = new XSSFWorkbook();
+                    Sheet sheet = workbook.createSheet("Datos MTP");
+
+                    int rowNum = 0;
+                    for (hbdbdata data : dataList) {
+                        Row row = sheet.createRow(rowNum++);
+
+                        row.createCell(0).setCellValue(data.getArea());
+                        row.createCell(1).setCellValue(data.getDescripcion());
+                        row.createCell(2).setCellValue(data.getEstado());
+                        row.createCell(3).setCellValue(data.getNombre());
+                        row.createCell(4).setCellValue(data.getFecha());
+
+                    }
+
+                    //String filePath = getExternalFilesDir(null).getPath().toString() + "/datos_hbdb.xlsx";
+                    String filePath = requireActivity().getExternalFilesDir(null).getPath() + "/datos_hbdb.xlsx";
+                    try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                        workbook.write(outputStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Uri fileUri = FileProvider.getUriForFile(requireContext(), requireContext().getApplicationContext().getPackageName() + ".provider", new File(filePath));
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("application/vnd.ms-excel");
+                    intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(Intent.createChooser(intent, "Compartir archivo"));
+
+                });
+
+
+
+                Toast.makeText(getActivity(), "Descargando....espera unos segundos", Toast.LENGTH_SHORT).show();
             }
         });
 
         cerrarsesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 // Acción para la tarjeta "Cerrar Sesión"
                 logout();
             }

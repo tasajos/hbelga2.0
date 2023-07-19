@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".ui.gallery.GalleryFragment">
+        tools:context=".ui.ordenadorpc.ordenadorpc">
 
         <TextView
             android:id="@+id/text_gallery"
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Nombre"
+                android:hint="EQUIPO"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -56,14 +56,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Area"
+                android:hint="AREA"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/mram3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MEMORIA RAM"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/mram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:entries="@array/tipos_ram"
+                android:prompt="@string/seleccionar_memoria" />
+
+            <EditText
+                android:id="@+id/procesador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="PROCESADOR"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/so"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="SISTEMA OPERATIVO"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estado"
+                android:text="Arquitectura"
                 android:textSize="16sp" />
 
             <Spinner
@@ -72,25 +104,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="10dp"
-                android:entries="@array/tipos_producto"
-                android:prompt="@string/seleccionar_tipo" />
+                android:entries="@array/tipos_arq"
+                android:prompt="@string/seleccionar_arquitectura" />
 
             <EditText
-                android:id="@+id/procesador"
+                android:id="@+id/hdoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Descripcion"
+                android:hint="DISCO DURO OCUPADO"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/fecha"
+                android:id="@+id/hdlib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Fecha"
-                android:enabled="false"
-                android:inputType="date" />
+                android:hint="DISCO DURO LIBRE"
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="match_parent"
@@ -102,7 +133,7 @@
                 android:layout_height="126dp"
                 android:layout_gravity="center_horizontal"
                 android:background="#FFFFFF"
-                app:srcCompat="@drawable/enviarss" />
+                app:srcCompat="@drawable/enviar64" />
 
         </LinearLayout>
 

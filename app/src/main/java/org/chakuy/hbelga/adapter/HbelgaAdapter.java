@@ -48,7 +48,7 @@ public class HbelgaAdapter extends FirestoreRecyclerAdapter<HbelgaModel,HbelgaAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.nombre);
+            name = itemView.findViewById(R.id.equipo);
             description = itemView.findViewById(R.id.descripcionc);
             state = itemView.findViewById(R.id.estadoc);
             dateb = itemView.findViewById(R.id.fecha);
