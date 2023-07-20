@@ -13,6 +13,7 @@
     <string name="menu_ordenador">Añadir PC</string>
     <string name="menu_slideshow">Quienes Somos</string>
     <string name="menu_lista">Lista Equipos</string>
+    <string name="menu_listapc">Lista Ordenadores</string>
 
 
     <string-array name="tipos">

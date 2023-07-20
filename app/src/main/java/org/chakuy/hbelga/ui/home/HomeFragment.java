@@ -47,6 +47,9 @@ public class HomeFragment extends Fragment {
     private LinearLayout descargar;
     private LinearLayout cerrarsesion;
 
+    private LinearLayout listadopc;
+
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference hbdbRef = db.collection("hbdb");
 
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment {
         listado = root.findViewById(R.id.listado);
         descargar = root.findViewById(R.id.descargar);
         cerrarsesion = root.findViewById(R.id.cerrarsesion);
+        listadopc = root.findViewById(R.id.listadopc);
 
         setupCardClickListeners();
 
@@ -83,6 +87,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        listadopc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción para la tarjeta "Listado PC"
+                //Intent intent = new Intent(getActivity(), DatosPC.class);
+
+                Navigation.findNavController(view).navigate(R.id.nav_pc);
+            }
+        });
         descargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

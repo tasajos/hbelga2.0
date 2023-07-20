@@ -34,4 +34,10 @@
         android:name="org.chakuy.hbelga.ui.verlista.slideshow.vlista"
         android:label="@string/menu_lista"
         tools:layout="@layout/fragment_vlista" />
+
+    <fragment
+        android:id="@+id/nav_pc"
+        android:name="org.chakuy.hbelga.ui.datospc.datosPc"
+        android:label="@string/menu_listapc"
+        tools:layout="@layout/fragment_datos_pc" />
 </navigation>
